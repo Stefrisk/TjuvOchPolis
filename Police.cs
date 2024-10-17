@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TjuvOchPolis
 {
-    internal class Police
+    internal class Police: Person
     {
     }
 }

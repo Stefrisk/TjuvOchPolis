@@ -5,6 +5,9 @@
         static void Main(string[] args)
         {
             Console.WriteLine("Cops and Robbers");
+            Town.PrintTown();
+            Console.ReadLine();
+
         }
     }
 }

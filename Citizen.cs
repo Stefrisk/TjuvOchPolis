@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TjuvOchPolis
 {
-    internal class Citizen
+    internal class Citizen: Person
     {
     }
 }

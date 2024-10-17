@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TjuvOchPolis
 {
-    internal class Robber : Person
+    class Town_Graphic
     {
     }
 }
