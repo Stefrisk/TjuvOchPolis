@@ -6,13 +6,35 @@ using System.Threading.Tasks;
 
 namespace TjuvOchPolis
 {
-    internal class Person: Town
+    public class Person
     {
-        internal string Name { get; set; }
-        internal string Direction { get; set; }
-        internal string[] Inventory { get; set; }
-        internal int Y {  get; set; }
-        internal int X { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
+        public int XDirection { get; set; }
+        public int YDirection { get; set; }
+        public List<Item> Inventory { get; set; }
 
+        public Person(int x, int y)
+        {
+            X = x;
+            Y = y;
+            Inventory = new List<Item>();
+            SetRandomDirection();
+        }
+
+        public void SetRandomDirection()
+        {
+            Random rnd = new Random();
+            XDirection = rnd.Next(-1, 2);  // Slumpmässig riktning mellan -1, 0 och 1
+            YDirection = rnd.Next(-1, 2);  // Slumpmässig riktning mellan -1, 0 och 1
+        }
+
+        public void Move(int gridWidth, int gridHeight)
+        {
+            X = (X + XDirection + gridWidth) % gridWidth;   // Hantera wrapping
+            Y = (Y + YDirection + gridHeight) % gridHeight; // Hantera wrapping
+        }
     }
 }
+
+

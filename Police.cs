@@ -8,5 +8,6 @@ namespace TjuvOchPolis
 {
     internal class Police: Person
     {
+
     }
 }

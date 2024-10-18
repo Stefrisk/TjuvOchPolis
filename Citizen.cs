@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace TjuvOchPolis
 {
-    internal class Citizen: Person
+    public class Citizen : Person
     {
+        public Citizen(int x, int y) : base(x, y)
+        {
+            Inventory.Add(new Item("Nycklar"));
+            Inventory.Add(new Item("Mobiltelefon"));
+            Inventory.Add(new Item("Pengar"));
+            Inventory.Add(new Item("Klocka"));
+        }
     }
 }
