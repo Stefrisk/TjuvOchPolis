@@ -11,7 +11,7 @@ namespace TjuvOchPolis
         internal string Name { get; set; }
         internal string Direction { get; set; }
         internal string[] Inventory { get; set; }
-        internal int Y {  get; set; }
+        internal int Y { get; set;}
         internal int X { get; set; }
 
     }
