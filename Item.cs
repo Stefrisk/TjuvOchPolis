@@ -10,16 +10,27 @@ public class Item
     }
 }
 
-public class Klocka: Item
+public class Klocka : Item
 {
     public Klocka(string namn) : base(namn)
     {
-        
+
     }
 }
 
 public class Pengar : Item
 {
+    public string ItemName
+    {
+        get
+        {
+            return ItemName;
+         }
+        set 
+        {
+            ItemName = "Pengar"; 
+        }
+    }
     public Pengar(string namn) : base(namn)
     {
         
@@ -30,14 +41,14 @@ public class Mobil : Item
 {
     public Mobil(string namn) : base(namn)
     {
-        
+
     }
 }
 public class Nycklar : Item
 {
     public Nycklar(string namn) : base(namn)
     {
-        
+
     }
 }
 
