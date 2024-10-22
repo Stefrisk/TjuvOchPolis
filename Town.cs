@@ -39,11 +39,11 @@ namespace TjuvOchPolis
                
 
             }
-            for (int k = 0; k < matris.GetLength(0); k++)
+            for (int i = 0; i < matris.GetLength(0); i++)
             {
                 for (int j = 0; j < matris.GetLength(1); j++)
                 {
-                    Console.Write(matris[k, j]);
+                    Console.Write(matris[i, j]);
                 }
                 Console.WriteLine();
             }
