@@ -11,7 +11,7 @@ namespace TjuvOchPolis
         
         public Citizen(int x, int y) : base(x,y)
         {
-            Inventory = new List<Item>();
+            
             Inventory.Add(new Item("Nycklar"));
             Inventory.Add(new Item("Mobiltelefon"));
             Inventory.Add(new Item("Pengar"));
