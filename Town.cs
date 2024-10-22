@@ -7,43 +7,67 @@ using System.Threading.Tasks;
 
 namespace TjuvOchPolis
 {
-    internal class Town
+    public class Town
     {
-        public static void PrintTown()
+        public string[,] _karta = new string[27, 102];
+        public string[,] Karta
         {
-            string[,] locations = new string[26, 101];
-            string[,] matris = new string[26, 101];
-            for (int i = 0; i < matris.GetLength(0); i++)
+            get
             {
-                for (int j = 0; j < matris.GetLength(1); j++)
+                return _karta;
+            }
+            set
+            {
+                
+            }
+        }
+        public string[,] _playerLocations = new string[27, 102];
+        public string[,] PlayerLocations
+        {
+            get
+            {
+                return _playerLocations;
+            }
+            set
+            {
+                
+            }
+        }
+        public static void PrintTown(Town town)
+        {
+            
+
+            for (int i = 0; i < town.Karta.GetLength(0); i++)
+            {
+                for (int j = 0; j < town.Karta.GetLength(1); j++)
                 {
-                    if (i == 0 || i == 25)
+                    if (i == 0 || i == 26)
                     {
-                        matris[i, j] = "-";
+                        town.Karta[i, j] = "-";
                     }
-                    else if (j == 0 || j == 100)
+                    else if (j == 0 || j == 101)
                     {
-                        matris[i, j] = "|";
+                        town.Karta[i, j] = "|";
                     }
-                    else if (matris[i,j]==null && locations[i,j]== "c")
+                    else if (town.Karta[i, j] == null && town.PlayerLocations[i, j] == "c")
                     {
-                        matris[i,j] = "C";
+                        town.Karta[i, j] = "C";
                     }
                     else
                     {
-                        matris[i, j] = " ";
+                        town.Karta[i, j] = " ";
                     }
-                    
-                    
+
+
                 }
-               
+
 
             }
-            for (int i = 0; i < matris.GetLength(0); i++)
+            for (int i = 0; i < town.Karta.GetLength(0); i++)
             {
-                for (int j = 0; j < matris.GetLength(1); j++)
+                for (int j = 0; j < town.Karta.GetLength(1); j++)
                 {
-                    Console.Write(matris[i, j]);
+                    Console.Write(town.Karta[i, j]);
                 }
                 Console.WriteLine();
             }

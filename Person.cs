@@ -17,8 +17,8 @@ namespace TjuvOchPolis
 
         public Person(int x, int y)
         {
-            XLocation = x;
-            YLocation = y;
+            XLocation = RandomStartPosX();
+            YLocation = RandomStartPosY();
             Inventory = new List<Item>();
             SetRandomDirection();
             string name = GenerateRandomName();
@@ -44,6 +44,19 @@ namespace TjuvOchPolis
             string name  = names[rnd.Next(names.Length)];
             return name;
         }
+        public int RandomStartPosX()
+        {
+            Random rndX = new Random();
+            int x = rndX.Next(0, 100);
+            return x;
+        }
+        public int RandomStartPosY()
+        {
+            Random rndY = new Random();
+            int y = rndY.Next(0, 100);
+            return y;
+        }
+
     }
 }
 
