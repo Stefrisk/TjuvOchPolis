@@ -6,7 +6,16 @@ using System.Threading.Tasks;
 
 namespace TjuvOchPolis
 {
-    internal class Police: Person
+    public class Police: Person
     {
+        public Police(int x,int y) : base(x,y) 
+        {
+            Inventory = new List<Item>();
+            
+            SetRandomDirection();
+            string name = GenerateRandomName();
+            Name = name;
+        }
+
     }
 }
