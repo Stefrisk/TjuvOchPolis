@@ -6,13 +6,45 @@ using System.Threading.Tasks;
 
 namespace TjuvOchPolis
 {
-    internal class Person: Town
+    public class Person
     {
-        internal string Name { get; set; }
-        internal string Direction { get; set; }
-        internal string[] Inventory { get; set; }
-        internal int Y { get; set;}
-        internal int X { get; set; }
+        public string Name { get; set; }
+        public int XLocation { get; set; }
+        public int YLocation { get; set; }
+        public int XDirection { get; set; }
+        public int YDirection { get; set; }
+        public List<Item> Inventory { get; set; }
 
+        public Person(int x, int y)
+        {
+            XLocation = x;
+            YLocation = y;
+            Inventory = new List<Item>();
+            SetRandomDirection();
+            string name = GenerateRandomName();
+            Name = name;
+        }
+
+        public void SetRandomDirection()
+        {
+            Random rnd = new Random();
+            XDirection = rnd.Next(-1, 2);  // Slumpmässig riktning mellan -1, 0 och 1
+            YDirection = rnd.Next(-1, 2);  // Slumpmässig riktning mellan -1, 0 och 1
+        }
+
+        public void Move(int gridWidth, int gridHeight)
+        {
+            XLocation = (XLocation + XDirection + gridWidth) % gridWidth;   // Hantera wrapping
+            YLocation = (YLocation + YDirection + gridHeight) % gridHeight; // Hantera wrapping
+        }
+        public string GenerateRandomName()
+        {
+            string[] names = { "Alice", "Bob", "Charlie", "Diana", "Tom", "Justin", "Mikael", "Tod", "Moa", "Stefan", "Mattias","Joe" }; // Lägg till fler namn
+            Random rnd = new Random();
+            string name  = names[rnd.Next(names.Length)];
+            return name;
+        }
     }
 }
+
+
