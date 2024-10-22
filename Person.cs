@@ -15,15 +15,21 @@ namespace TjuvOchPolis
         public int YDirection { get; set; }
         public List<Item> Inventory { get; set; }
 
-        public Person(int x, int y)
+        public Person(int amountOfPeople)
         {
-            XLocation = RandomStartPosX();
-            YLocation = RandomStartPosY();
-            Inventory = new List<Item>();
-            SetRandomDirection();
-            string name = GenerateRandomName();
-            Name = name;
+            for (int i = 0; i <= amountOfPeople; i++)
+            {
+                XLocation = RandomStartPosX();
+                YLocation = RandomStartPosY();
+                Inventory = new List<Item>();
+                SetRandomDirection();
+                string name = GenerateRandomName();
+                Name = name;
+
+            }
+            
         }
+        
 
         public void SetRandomDirection()
         {
