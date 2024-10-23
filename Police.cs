@@ -8,7 +8,7 @@ namespace TjuvOchPolis
 {
     public class Police: Person
     {
-        public Police(int x,int y) : base(x,y) 
+        public Police() : base() 
         {
             Inventory = new List<Item>();
             RandomStartPosX();

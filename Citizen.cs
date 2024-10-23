@@ -9,8 +9,9 @@ namespace TjuvOchPolis
     public class Citizen : Person
     {
         
-        public Citizen(int x, int y) : base(x,y)
+        public Citizen() : base()
         {
+            
             
             Inventory.Add(new Item("Nycklar"));
             Inventory.Add(new Item("Mobiltelefon"));
@@ -21,6 +22,9 @@ namespace TjuvOchPolis
             SetRandomDirection();
             string name = GenerateRandomName();
             Name = name;
+            
+
+            
 
         }
     }
