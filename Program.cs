@@ -11,6 +11,8 @@
             Console.ReadLine();
             
             Citizen citizen = new Citizen(3,3);
+            town.Persons.Add(citizen);
+
             for (int i = 0; i < citizen.Inventory.Count; i++) 
             {
                 Console.WriteLine(citizen.Inventory[i].Namn );
