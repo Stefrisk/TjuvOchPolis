@@ -15,10 +15,10 @@ namespace TjuvOchPolis
         public int YDirection { get; set; }
         public List<Item> Inventory { get; set; }
 
-        public Person(int amountOfPeople)
+        public Person()
         {
-            for (int i = 0; i <= amountOfPeople; i++)
-            {
+            
+           
                 XLocation = RandomStartPosX();
                 YLocation = RandomStartPosY();
                 Inventory = new List<Item>();
@@ -26,7 +26,8 @@ namespace TjuvOchPolis
                 string name = GenerateRandomName();
                 Name = name;
 
-            }
+
+            
             
         }
         
@@ -45,7 +46,14 @@ namespace TjuvOchPolis
         }
         public string GenerateRandomName()
         {
-            string[] names = { "Alice", "Bob", "Charlie", "Diana", "Tom", "Justin", "Mikael", "Tod", "Moa", "Stefan", "Mattias","Joe" }; // Lägg till fler namn
+            string[] names = { "Alice", "Bob", "Charlie", "Diana", "Tom", "Justin", "Mikael", "Tod", "Moa", "Stefan", "Mattias","Joe","Noah",
+    "Liam","Mason","Jacob","William","Ethan","James","Alexander","Michael","Benjamin","Elijah","Daniel","Aiden","Logan","Matthew","Lucas",
+    "Jackson","David","Oliver","Jayden","Joseph","Gabriel","Samuel","Carter","Anthony","John","Dylan","Luke","Henry","Andrew","Isaac","Christopher",
+    "Joshua","Wyatt","Sebastian","Owen","Caleb","Nathan","Ryan","Jack","Hunter","Levi","Christian","Jaxon","Julian","Landon","Grayson","Jonathan",
+    "Isaiah","Charles","Thomas","Aaron","Eli","Connor","Jeremiah","Cameron","Josiah","Adrian","Colton","Jordan","Brayden","Nicholas","Robert",
+    "Angel","Hudson","Lincoln","Evan","Dominic","Austin","Gavin","Nolan","Parker","Adam","Chase","Jace","Ian","Cooper","Easton","Kevin","Jose",
+    "Tyler","Brandon","Asher","Jaxson","Mateo","Jason","Ayden","Zachary","Carson","Xavier","Leo","Ezra","Bentley","Sawyer","Kayden","Blake","Nathaniel",
+    "Ryder" };
             Random rnd = new Random();
             string name  = names[rnd.Next(names.Length)];
             return name;
@@ -53,7 +61,7 @@ namespace TjuvOchPolis
         public int RandomStartPosX()
         {
             Random rndX = new Random();
-            int x = rndX.Next(0, 100);
+            int x = rndX.Next(0, 100); // combine these 2 methods starting positions
             return x;
         }
         public int RandomStartPosY()
