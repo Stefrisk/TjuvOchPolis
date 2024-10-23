@@ -9,6 +9,7 @@ namespace TjuvOchPolis
 {
     public class Town
     {
+        
         public string[,] _karta = new string[27, 102];
         public string[,] Karta
         {
