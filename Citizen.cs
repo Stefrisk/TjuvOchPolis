@@ -17,8 +17,8 @@ namespace TjuvOchPolis
             Inventory.Add(new Item("Mobiltelefon"));
             Inventory.Add(new Item("Pengar"));
             Inventory.Add(new Item("Klocka"));
-            RandomStartPosX();
-            RandomStartPosY();
+            XLocation = RandomStartPosX();
+            YLocation = RandomStartPosY();
             SetRandomDirection();
             string name = GenerateRandomName();
             Name = name;
