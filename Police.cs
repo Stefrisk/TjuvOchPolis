@@ -11,8 +11,8 @@ namespace TjuvOchPolis
         public Police() : base() 
         {
             Inventory = new List<Item>();
-            RandomStartPosX();
-            RandomStartPosY();
+            XLocation = RandomStartPosX();
+            YLocation = RandomStartPosY();
             SetRandomDirection();
             string name = GenerateRandomName();
             Name = name;
