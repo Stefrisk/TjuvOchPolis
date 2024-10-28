@@ -13,8 +13,8 @@ namespace TjuvOchPolis
         {
             
             Inventory = new List<Item>();
-            RandomStartPosX();
-            RandomStartPosY();
+            XLocation = RandomStartPosX();
+            YLocation = RandomStartPosY();
             SetRandomDirection();
             string name = GenerateRandomName();
             Name = name;
