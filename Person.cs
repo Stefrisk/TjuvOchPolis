@@ -39,10 +39,15 @@ namespace TjuvOchPolis
             YDirection = rnd.Next(-1, 2);  // Slumpmässig riktning mellan -1, 0 och 1
         }
 
-        public void Move(int gridWidth, int gridHeight)
+        public static void Move(List<Person> PeopleIntown)
         {
-            XLocation = (XLocation + XDirection + gridWidth) % gridWidth;   // Hantera wrapping
-            YLocation = (YLocation + YDirection + gridHeight) % gridHeight; // Hantera wrapping
+            for(int i = 0; i < PeopleIntown.Count; i++) 
+            {
+                PeopleIntown[i].XLocation = (PeopleIntown[i].XLocation + PeopleIntown[i].XDirection + 27) % 27;   // Hantera wrapping
+                PeopleIntown[i].YLocation = (PeopleIntown[i].YLocation + PeopleIntown[i].YDirection + 102) % 102; // Hantera wrapping
+            }
+
+
         }
         public string GenerateRandomName()
         {
@@ -61,13 +66,13 @@ namespace TjuvOchPolis
         public int RandomStartPosX()
         {
             Random rndX = new Random();
-            int x = rndX.Next(0, 100); // combine these 2 methods starting positions
+            int x = rndX.Next(0, 26); // combine these 2 methods starting positions
             return x;
         }
         public int RandomStartPosY()
         {
             Random rndY = new Random();
-            int y = rndY.Next(0, 100);
+            int y = rndY.Next(0, 101);
             return y;
         }
 
