@@ -8,7 +8,8 @@ namespace TjuvOchPolis
 {
     public class Citizen : Person
     {
-        
+        public override string Character => "C";
+
         public Citizen() : base()
         {
             
