@@ -14,11 +14,18 @@ namespace TjuvOchPolis
         public int XDirection { get; set; }
         public int YDirection { get; set; }
         public List<Item> Inventory { get; set; }
+        public virtual string Character
+        {
+            get
+            {
+                return " ";
+            }
+        }
+
 
         public Person()
         {
-            
-           
+        
                 XLocation = RandomStartPosX();
                 YLocation = RandomStartPosY();
                 Inventory = new List<Item>();
@@ -26,9 +33,6 @@ namespace TjuvOchPolis
                 string name = GenerateRandomName();
                 Name = name;
 
-
-            
-            
         }
         
 
