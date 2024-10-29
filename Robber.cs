@@ -9,6 +9,8 @@ namespace TjuvOchPolis
 {
     public class Robber : Person
     {
+        public override string Character => "R";
+
         public Robber() : base() 
         {
             
