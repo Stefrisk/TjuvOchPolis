@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace TjuvOchPolis
 {
+ 
     public class Police: Person
     {
+        public override string Character => "P";
+
         public Police() : base() 
         {
             Inventory = new List<Item>();
