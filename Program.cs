@@ -23,10 +23,11 @@ namespace TjuvOchPolis
             }
         }
 
-        private static void RobberCitizenInteractions(List<Person> peopleInTown, Town town)
+
+        public static void RunAllInteractions(List<Person> peopleInTown, Town town)
         {
             for (int i = 0; i < peopleInTown.Count; i++)
-            {             
+            {
                 if (peopleInTown[i] is Robber robber)
                 {
                     int x = robber.XLocation;
@@ -36,8 +37,24 @@ namespace TjuvOchPolis
                     {
                         robber.Inventory = Town.RobItem(robber, citizen);
                     }
+
                 }
-            }
+                if (peopleInTown[i] is Police police)
+                {
+                    int x = police.XLocation;
+                    int y = police.YLocation;
+
+                    //Console.WriteLine(town.PlayerLocations[x, y].GetType());
+                    //Thread.Sleep(100);
+
+                    if (town.PlayerLocations[x, y] is Robber robber2)
+                    {
+                        Console.WriteLine("Här komer jag in");
+                        Thread.Sleep(1000);
+                        police.Inventory = Town.ConfiscateItem(police, robber2);
+                    }
+                }
+            }            
         }
 
         static void Main(string[] args)
@@ -51,21 +68,24 @@ namespace TjuvOchPolis
             town.PlayerLocations = Town.PlayerLocation(PeopleInTown,town.PlayerLocations); // save player start locations to town 
             
 
+
             while (true)
             {
                 Console.Clear();
-                
-                Console.WriteLine("Cops and Robbers");              
+                Console.WriteLine("Cops and Robbers");
+
                 Console.WriteLine();
 
                 Person.Move(PeopleInTown);                                          // player moves onestep 
                 
                 Town.PlayerLocation(PeopleInTown, town._playerLocations);           // saves updated player location to the array                
 
-                RobberCitizenInteractions(PeopleInTown, town);
+                RunAllInteractions(PeopleInTown, town);
+
+
 
                 Town.PrintTown(town);                                               //Print Town and player locations 
-                Thread.Sleep(100);
+                Thread.Sleep(1);
             }
         }
     }
