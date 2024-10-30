@@ -35,7 +35,7 @@ namespace TjuvOchPolis
 
                     if (town.PlayerLocations[x, y] is Citizen citizen)
                     {
-                        robber.Inventory = Town.RobItem(robber, citizen);
+                        robber.Inventory = Town.RobItem(robber, citizen,town);
                     }
 
                 }
@@ -51,7 +51,7 @@ namespace TjuvOchPolis
                     {
                         Console.WriteLine("Här komer jag in");
                         Thread.Sleep(1000);
-                        police.Inventory = Town.ConfiscateItem(police, robber2);
+                        police.Inventory = Town.ConfiscateItem(police, robber2,town);
                     }
                 }
             }            
