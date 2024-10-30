@@ -34,7 +34,13 @@ namespace TjuvOchPolis
                 _playerLocations = value;
             }
         }
+        public Stack<string> _interactions = new Stack<string>();
+        public Stack<string> Interactions
+        {
+            get { return _interactions; }
+            set { _interactions = value; }
 
+        }
        
 
         public static void PrintTown(Town town)
@@ -83,6 +89,12 @@ namespace TjuvOchPolis
                 }
                 Console.WriteLine();
             }
+                string[] recentInteractions = town._interactions.ToArray();
+            int itemsToPrint = Math.Min(5, recentInteractions.Length);
+            for(int i = 0;i < itemsToPrint ; i++)
+            {
+                Console.WriteLine(recentInteractions[i]);
+            }
         }
 
         public static Person[,] PlayerLocation(List<Person> ListOfPeople, Person[,] PlayerLocations)
@@ -101,7 +113,7 @@ namespace TjuvOchPolis
         }
 
 
-        public static List<Item> RobItem(Person robber, Citizen citizen)
+        public static List<Item> RobItem(Person robber, Citizen citizen,Town town)
         {
             Random rnd = new Random();
             if (citizen.Inventory.Any())
@@ -110,13 +122,13 @@ namespace TjuvOchPolis
                 citizen.Inventory.Remove(item);
                 robber.Inventory.Add(item);
 
-                Console.WriteLine($"Tjuven {robber.Name} stal {item.Namn} från {citizen.Name}");
-                Thread.Sleep(350);
+                town._interactions.Push($"Tjuven {robber.Name} stal {item.Namn} från {citizen.Name}");
+                
             }
             return robber.Inventory;
         }
 
-        public static List<Item> ConfiscateItem(Person police, Robber robber)
+        public static List<Item> ConfiscateItem(Person police, Robber robber, Town town)
         {
             Console.WriteLine("Här kom jag in!");
             Thread.Sleep(1000);
@@ -127,7 +139,7 @@ namespace TjuvOchPolis
                     Item item = robber.Inventory[i];
                     robber.Inventory.Remove(item);
                     police.Inventory.Add(item);
-                    Console.WriteLine($"Polisen {police.Name} beslagtog {item.Namn} från {robber.Name}");
+                    town._interactions.Push($"Polisen {police.Name} beslagtog {item.Namn} från {robber.Name}");
                     Thread.Sleep(1000);
                 }
 
