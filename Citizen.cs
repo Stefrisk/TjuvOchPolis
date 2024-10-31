@@ -8,7 +8,7 @@ namespace TjuvOchPolis
 {
     public class Citizen : Person
     {
-        public override string Character => "C";
+        
 
         public Citizen() : base()
         {
@@ -23,6 +23,7 @@ namespace TjuvOchPolis
             SetRandomDirection();
             string name = GenerateRandomName();
             Name = name;
+            Character = "C";
             
 
             
