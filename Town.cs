@@ -41,7 +41,7 @@ namespace TjuvOchPolis
             set { _interactions = value; }
 
         }
-       
+
 
         public static void PrintTown(Town town)
         {
@@ -89,12 +89,13 @@ namespace TjuvOchPolis
                 }
                 Console.WriteLine();
             }
-                string[] recentInteractions = town._interactions.ToArray();
+            string[] recentInteractions = town._interactions.ToArray();
             int itemsToPrint = Math.Min(5, recentInteractions.Length);
-            for(int i = 0;i < itemsToPrint ; i++)
+            for (int i = 0; i < itemsToPrint; i++)
             {
                 Console.WriteLine(recentInteractions[i]);
             }
+           
         }
 
         public static Person[,] PlayerLocation(List<Person> ListOfPeople, Person[,] PlayerLocations)
@@ -113,42 +114,42 @@ namespace TjuvOchPolis
         }
 
 
-        public static List<Item> RobItem(Person robber, Citizen citizen,Town town)
-        {
-            Random rnd = new Random();
-            if (citizen.Inventory.Any())
-            {
-                Item item = citizen.Inventory[rnd.Next(0, citizen.Inventory.Count)];
-                citizen.Inventory.Remove(item);
-                robber.Inventory.Add(item);
+        //public static List<Item> RobItem(List<Person> peopleInTown, Town town)
+        //{
+        //    //Random rnd = new Random();
+        //    //if (citizen.Inventory.Any())
+        //    //{
+        //    //    Item item = citizen.Inventory[rnd.Next(0, citizen.Inventory.Count)];
+        //    //    citizen.Inventory.Remove(item);
+        //    //    robber.Inventory.Add(item);
 
-                town._interactions.Push($"Tjuven {robber.Name} stal {item.Namn} från {citizen.Name}");
-                
-            }
-            return robber.Inventory;
-        }
+        //    //    town._interactions.Push($"Tjuven {robber.Name} stal {item.Namn} från {citizen.Name}");
 
-        public static List<Item> ConfiscateItem(Person police, Robber robber, Town town)
-        {
-            Console.WriteLine("Här kom jag in!");
-            Thread.Sleep(1000);
-            if (robber.Inventory.Any())
-            {
-                for (int i = 0; i < robber.Inventory.Count; i++)
-                {
-                    Item item = robber.Inventory[i];
-                    robber.Inventory.Remove(item);
-                    police.Inventory.Add(item);
-                    town._interactions.Push($"Polisen {police.Name} beslagtog {item.Namn} från {robber.Name}");
-                    Thread.Sleep(1000);
-                }
+        //    //}
+        //    return robber.Inventory;
+        //}
 
-                Thread.Sleep(2500);
-            }
-            return police.Inventory;
-        }
+        //public static List<Item> ConfiscateItem(List<Person> peopleInTown, Town town)
+        //{
+        //    Console.WriteLine("Här kom jag in!");
+        //    Thread.Sleep(1000);
+        //    if (robber.Inventory.Any())
+        //    {
+        //        for (int i = 0; i < robber.Inventory.Count; i++)
+        //        {
+        //            Item item = robber.Inventory[i];
+        //            robber.Inventory.Remove(item);
+        //            police.Inventory.Add(item);
+        //            town._interactions.Push($"Polisen {police.Name} beslagtog {item.Namn} från {robber.Name}");
+        //            Thread.Sleep(1000);
+        //        }
+
+        //        Thread.Sleep(2500);
+        //    }
+        //    return police.Inventory;
     }
 }
+
 
 
 

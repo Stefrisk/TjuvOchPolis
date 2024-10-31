@@ -1,4 +1,5 @@
-﻿using System.Runtime.InteropServices;
+﻿using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 namespace TjuvOchPolis
 {
@@ -28,38 +29,67 @@ namespace TjuvOchPolis
         {
             for (int i = 0; i < peopleInTown.Count; i++)
             {
-                if (peopleInTown[i] is Robber robber)
+                if (peopleInTown[i].Character == "R")
                 {
-                    int x = robber.XLocation;
-                    int y = robber.YLocation;
+                    int x = peopleInTown[i].XLocation;
+                    int y = peopleInTown[i].YLocation;
 
-                    if (town.PlayerLocations[x, y] is Citizen citizen)
+                    if (town.PlayerLocations[x, y].Character == "C")
                     {
-                        robber.Inventory = Town.RobItem(robber, citizen,town);
+                        Random rnd = new Random();
+                        if (town.PlayerLocations[x, y].Inventory.Any())
+                        {
+                            Item item = town.PlayerLocations[x, y].Inventory[rnd.Next(0, town.PlayerLocations[x, y].Inventory.Count)];
+                            town.PlayerLocations[x, y].Inventory.Remove(item);
+                            peopleInTown[i].Inventory.Add(item);
+
+                            town._interactions.Push($"Tjuven {peopleInTown[i].Name} stal {item.Namn} från {town.PlayerLocations[x, y].Name}");
+
+                        }
+                        
                     }
+                    
 
                 }
-                if (peopleInTown[i] is Police police)
+                
+            }
+            for (int i = 0; i < peopleInTown.Count; i++)
+            {
+                if (peopleInTown[i].Character == "R")
                 {
-                    int x = police.XLocation;
-                    int y = police.YLocation;
+                    int x = peopleInTown[i].XLocation;
+                    int y = peopleInTown[i].YLocation;
+                    
 
-                    //Console.WriteLine(town.PlayerLocations[x, y].GetType());
-                    //Thread.Sleep(100);
 
-                    if (town.PlayerLocations[x, y] is Robber robber2)
+
+                    if (town._playerLocations[x, y].Character == "P")
                     {
-                        Console.WriteLine("Här komer jag in");
-                        Thread.Sleep(1000);
-                        police.Inventory = Town.ConfiscateItem(police, robber2,town);
+                        
+
+                        if (peopleInTown[i].Inventory.Count > 0)
+                        {
+
+                            for (int j = 0; j < peopleInTown[i].Inventory.Count; j++)
+                            {
+                                Item item = peopleInTown[i].Inventory[j];
+                                peopleInTown[i].Inventory.Remove(item);
+                                town._playerLocations[x, y].Inventory.Add(item);
+                                town._interactions.Push($"Polisen {town._playerLocations[x, y].Name} beslagtog {item.Namn} från {peopleInTown[i].Name}");
+
+                            }
+
+
+                        }
+
                     }
                 }
-            }            
+            }
         }
 
         static void Main(string[] args)
         {
-            int AmountofRobbers = 10;
+            int AmountofRobbers = 15;
             int AmountofCitizens = 20;
             int AmountofPolis = 15;
             List<Person> PeopleInTown = new List<Person>();                     //make list of people

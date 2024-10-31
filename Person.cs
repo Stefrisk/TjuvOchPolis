@@ -14,13 +14,10 @@ namespace TjuvOchPolis
         public int XDirection { get; set; }
         public int YDirection { get; set; }
         public List<Item> Inventory { get; set; }
-        public virtual string Character
-        {
-            get
-            {
-                return " ";
-            }
-        }
+        public string Character {  get; set; }
+        
+           
+        
 
 
         public Person()

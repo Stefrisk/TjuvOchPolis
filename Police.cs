@@ -9,7 +9,7 @@ namespace TjuvOchPolis
  
     public class Police: Person
     {
-        public override string Character => "P";
+        
 
         public Police() : base() 
         {
@@ -19,6 +19,7 @@ namespace TjuvOchPolis
             SetRandomDirection();
             string name = GenerateRandomName();
             Name = name;
+            Character = "P";
         }
 
     }

@@ -9,7 +9,7 @@ namespace TjuvOchPolis
 {
     public class Robber : Person
     {
-        public override string Character => "R";
+        
 
         public Robber() : base() 
         {
@@ -20,7 +20,7 @@ namespace TjuvOchPolis
             SetRandomDirection();
             string name = GenerateRandomName();
             Name = name;
-            
+            Character = "R";
 
             
         }
