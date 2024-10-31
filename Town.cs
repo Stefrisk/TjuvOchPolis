@@ -10,7 +10,7 @@ namespace TjuvOchPolis
     public class Town
     {
 
-        public string[,] _karta = new string[27, 102];
+        public string[,] _karta = new string[27, 122];
         public string[,] Karta
         {
             get
@@ -22,7 +22,7 @@ namespace TjuvOchPolis
                 _karta = value;
             }
         }
-        public Person[,] _playerLocations = new Person[27, 102];
+        public Person[,] _playerLocations = new Person[27, 122];
         public Person[,] PlayerLocations
         {
             get
@@ -42,16 +42,11 @@ namespace TjuvOchPolis
 
         }
 
+        
+
 
         public static void PrintTown(Town town)
         {
-            for (int i = 0; i < town.Karta.GetLength(0); i++)
-            {
-                for (int j = 0; j < town.Karta.GetLength(1); j++)
-                {
-                    town.Karta[i, j] = " "; // Fyll med tomma strängar
-                }
-            }
 
             for (int i = 0; i < town.Karta.GetLength(0); i++)
             {
@@ -65,10 +60,22 @@ namespace TjuvOchPolis
                     {
                         town.Karta[i, j] = "¯";
                     }
-                    else if (j == 0 || j == 101)
+                    else if (j == 0 || j == 101 || j == 121)
                     {
                         town.Karta[i, j] = "|";
                     }
+                    else if(j == 105 && i < 11)
+                    {
+                        town.Karta[i, j] = "|";
+                    }
+                    else if(i == 11 && j > 105)
+                    {
+                        town.Karta[i, j] = "¯";
+                    }
+                    else if (i == 0 && j > 105)
+                    {
+                        town.Karta[i, j] = "_";
+                    }                  
                     else if (town.PlayerLocations != null && town.PlayerLocations[i, j] != null && !string.IsNullOrEmpty(town.PlayerLocations[i, j].Character))
                     {
                         town.Karta[i, j] = town.PlayerLocations[i, j].Character;
@@ -79,6 +86,13 @@ namespace TjuvOchPolis
                     }
                 }
             }
+            
+            town.Karta[13, 109] = "P";
+            town.Karta[13, 110] = "R";
+            town.Karta[13, 111] = "I";
+            town.Karta[13, 112] = "S";
+            town.Karta[13, 113] = "O";
+            town.Karta[13, 114] = "N";
 
             for (int i = 0; i < town.Karta.GetLength(0); i++)
             {
@@ -95,7 +109,7 @@ namespace TjuvOchPolis
             {
                 Console.WriteLine(recentInteractions[i]);
             }
-           
+            
         }
 
         public static Person[,] PlayerLocation(List<Person> ListOfPeople, Person[,] PlayerLocations)
