@@ -59,14 +59,10 @@ namespace TjuvOchPolis
                 {
                     int x = peopleInTown[i].XLocation;
                     int y = peopleInTown[i].YLocation;
-                    
-
-
 
                     if (town._playerLocations[x, y].Character == "P")
                     {
                         
-
                         if (peopleInTown[i].Inventory.Count > 0)
                         {
 
@@ -79,9 +75,7 @@ namespace TjuvOchPolis
 
                             }
 
-
                         }
-
                     }
                 }
             }
@@ -96,15 +90,12 @@ namespace TjuvOchPolis
             Town town = new Town();                                             //Make town      
             MakePeople(AmountofRobbers, AmountofCitizens, AmountofPolis, ref PeopleInTown);//make people and add to list
             town.PlayerLocations = Town.PlayerLocation(PeopleInTown,town.PlayerLocations); // save player start locations to town 
-            
 
+            
 
             while (true)
             {
                 Console.Clear();
-                Console.WriteLine("Cops and Robbers");
-
-                Console.WriteLine();
 
                 Person.Move(PeopleInTown);                                          // player moves onestep 
                 
@@ -112,10 +103,9 @@ namespace TjuvOchPolis
 
                 RunAllInteractions(PeopleInTown, town);
 
-
-
                 Town.PrintTown(town);                                               //Print Town and player locations 
-                Thread.Sleep(1);
+
+                Thread.Sleep(500);
             }
         }
     }
