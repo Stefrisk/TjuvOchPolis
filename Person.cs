@@ -8,6 +8,8 @@ namespace TjuvOchPolis
 {
     public class Person
     {
+        public static Random rnd = new Random();
+
         public string Name { get; set; }
         public int XLocation { get; set; }
         public int YLocation { get; set; }
@@ -16,8 +18,8 @@ namespace TjuvOchPolis
         public List<Item> Inventory { get; set; }
         public string Character {  get; set; }
         
-           
-        
+
+
 
 
         public Person()
@@ -35,9 +37,12 @@ namespace TjuvOchPolis
 
         public void SetRandomDirection()
         {
-            Random rnd = new Random();
-            XDirection = rnd.Next(-1, 2);  // Slumpmässig riktning mellan -1, 0 och 1
-            YDirection = rnd.Next(-1, 2);  // Slumpmässig riktning mellan -1, 0 och 1
+            do
+            {
+                XDirection = rnd.Next(-1, 2);  // Slumpmässig riktning mellan -1, 0 och 1
+                YDirection = rnd.Next(-1, 2);  // Slumpmässig riktning mellan -1, 0 och 1
+            }while(XDirection == 0 && YDirection == 0);
+            
         }
 
         public static void Move(List<Person> PeopleIntown)
@@ -60,20 +65,19 @@ namespace TjuvOchPolis
     "Angel","Hudson","Lincoln","Evan","Dominic","Austin","Gavin","Nolan","Parker","Adam","Chase","Jace","Ian","Cooper","Easton","Kevin","Jose",
     "Tyler","Brandon","Asher","Jaxson","Mateo","Jason","Ayden","Zachary","Carson","Xavier","Leo","Ezra","Bentley","Sawyer","Kayden","Blake","Nathaniel",
     "Ryder" };
-            Random rnd = new Random();
             string name  = names[rnd.Next(names.Length)];
             return name;
         }
         public int RandomStartPosX()
         {
-            Random rndX = new Random();
-            int x = rndX.Next(0, 26); // combine these 2 methods starting positions
+
+            int x = rnd.Next(0, 26); // combine these 2 methods starting positions
             return x;
         }
         public int RandomStartPosY()
         {
-            Random rndY = new Random();
-            int y = rndY.Next(0, 101);
+
+            int y = rnd.Next(0, 101);
             return y;
         }
 
