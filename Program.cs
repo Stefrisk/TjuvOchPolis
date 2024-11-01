@@ -25,7 +25,7 @@ namespace TjuvOchPolis
         }
 
 
-        public static void RunAllInteractions(List<Person> peopleInTown, Town town)
+        public static void RunAllInteractions(List<Person> peopleInTown, List<Person> peopleInJail, Town town)
         {
             for (int i = 0; i < peopleInTown.Count; i++)
             {
@@ -44,6 +44,8 @@ namespace TjuvOchPolis
                             peopleInTown[i].Inventory.Add(item);
 
                             town._interactions.Push($"Tjuven {peopleInTown[i].Name} stal {item.Namn} från {town.PlayerLocations[x, y].Name}");
+                            town.CitizensRobbed++;
+                            
 
                         }
                         
@@ -72,6 +74,13 @@ namespace TjuvOchPolis
                                 peopleInTown[i].Inventory.Remove(item);
                                 town._playerLocations[x, y].Inventory.Add(item);
                                 town._interactions.Push($"Polisen {town._playerLocations[x, y].Name} beslagtog {item.Namn} från {peopleInTown[i].Name}");
+                                Person person = new Person();
+                                person = peopleInTown[i];
+                                peopleInJail.Add(person);
+                                peopleInTown.Remove(peopleInTown[i]);
+
+                                town.RobbersTaken++;
+                                town.RobbersInJail++;
 
                             }
 
@@ -86,10 +95,14 @@ namespace TjuvOchPolis
             int AmountofRobbers = 15;
             int AmountofCitizens = 20;
             int AmountofPolis = 15;
-            List<Person> PeopleInTown = new List<Person>();                     //make list of people
-            Town town = new Town();                                             //Make town      
+            Town town = new Town();                            //Make town      
+            List<Person> PeopleInTown = new List<Person>();
+            List<Person> PeopleInJail = new List<Person>();   //make list of people and people in jail
+            town.CitzensOnMap = AmountofCitizens;
+            town.RobbersOnMap = AmountofRobbers;
+            town.PoliceOnMap = AmountofPolis;
             MakePeople(AmountofRobbers, AmountofCitizens, AmountofPolis, ref PeopleInTown);//make people and add to list
-            town.PlayerLocations = Town.PlayerLocation(PeopleInTown,town.PlayerLocations); // save player start locations to town 
+            town.PlayerLocations = Town.PlayerLocation(PeopleInTown,town.PlayerLocations, town); // save player start locations to town 
 
             
 
@@ -99,9 +112,9 @@ namespace TjuvOchPolis
 
                 Person.Move(PeopleInTown);                                          // player moves onestep 
                 
-                Town.PlayerLocation(PeopleInTown, town._playerLocations);           // saves updated player location to the array                
+                Town.PlayerLocation(PeopleInTown, town._playerLocations, town);           // saves updated player location to the array                
 
-                RunAllInteractions(PeopleInTown, town);
+                RunAllInteractions(PeopleInTown,PeopleInJail, town);
 
                 Town.PrintTown(town);                                               //Print Town and player locations 
 
