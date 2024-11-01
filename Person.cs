@@ -55,6 +55,16 @@ namespace TjuvOchPolis
 
 
         }
+        public static void MoveJail(List<Person> peopleInJail)
+        {
+            for (int i = 0; i < peopleInJail.Count; i++)
+            {
+                peopleInJail[i].XLocation = (peopleInJail[i].XLocation + peopleInJail[i].XDirection + 17) % 17;   // Hantera wrapping
+                peopleInJail[i].YLocation = (peopleInJail[i].YLocation + peopleInJail[i].YDirection + 11) % 11; // Hantera wrapping
+            }
+
+
+        }
         public string GenerateRandomName()
         {
             string[] names = { "Alice", "Bob", "Charlie", "Diana", "Tom", "Justin", "Mikael", "Tod", "Moa", "Stefan", "Mattias","Joe","Noah",
