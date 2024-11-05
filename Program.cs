@@ -5,6 +5,14 @@ namespace TjuvOchPolis
 {
     internal class Program
     {
+        static Random rnd = new Random();
+
+        public static async Task StartDelayedTask(Town town, int itemCount, Robber person, List<Person> PeopleInJail, List<Person> PeopleInTown)
+        {
+            await Task.Delay(itemCount * 10000);
+            town.ReleasePrisoner(PeopleInJail, PeopleInTown, person, town); 
+           
+        }
         public static void MakePeople(int AmountOfRobbers, int AmountOfCitizens, int AmountOfPolis, ref List<Person> PeopleInTown)
         {
             for (int i = 0; i < AmountOfRobbers; i++)
@@ -25,70 +33,17 @@ namespace TjuvOchPolis
         }
 
 
-        public static void RunAllInteractions(List<Person> peopleInTown, List<Person> peopleInJail, Town town)
+        public static async Task RunAllInteractionsAsync(List<Person> peopleInTown, List<Person> peopleInJail, Town town)
         {
-            for (int i = 0; i < peopleInTown.Count; i++)
+            var robbers = peopleInTown.Where(p => p.Character == "R").ToList();
+
+            foreach (Robber robber in robbers)
             {
-                if (peopleInTown[i].Character == "R")
-                {
-                    int x = peopleInTown[i].XLocation;
-                    int y = peopleInTown[i].YLocation;
-
-                    if (town.PlayerLocations[x, y].Character == "C")
-                    {
-                        Random rnd = new Random();
-                        if (town.PlayerLocations[x, y].Inventory.Any())
-                        {
-                            Item item = town.PlayerLocations[x, y].Inventory[rnd.Next(0, town.PlayerLocations[x, y].Inventory.Count)];
-                            town.PlayerLocations[x, y].Inventory.Remove(item);
-                            peopleInTown[i].Inventory.Add(item);
-
-                            town._interactions.Push($"Tjuven {peopleInTown[i].Name} stal {item.Namn} från {town.PlayerLocations[x, y].Name}");
-                            town.CitizensRobbed++;
-                            
-
-                        }
-                        
-                    }
-                    
-
-                }
-                
-            }
-            for (int i = 0; i < peopleInTown.Count; i++)
-            {
-                if (peopleInTown[i].Character == "R")
-                {
-                    int x = peopleInTown[i].XLocation;
-                    int y = peopleInTown[i].YLocation;
-
-                    if (town._playerLocations[x, y].Character == "P")
-                    {
-                        
-                        if (peopleInTown[i].Inventory.Count > 0)
-                        {
-
-                            for (int j = 0; j < peopleInTown[i].Inventory.Count; j++)
-                            {
-                                Item item = peopleInTown[i].Inventory[j];
-                                peopleInTown[i].Inventory.Remove(item);
-                                town._playerLocations[x, y].Inventory.Add(item);
-                                town._interactions.Push($"Polisen {town._playerLocations[x, y].Name} beslagtog {item.Namn} från {peopleInTown[i].Name}");
-                                Person person = new Person();
-                                person = peopleInTown[i];
-                                peopleInJail.Add(person);
-                                peopleInTown.Remove(peopleInTown[i]);
-
-                                town.RobbersTaken++;
-                                town.RobbersInJail++;
-
-                            }
-
-                        }
-                    }
-                }
+                town.HandleCitizenInteraction(town, robber);
+                await town.HandlePoliceInteractionAsync(town, robber, peopleInTown, peopleInJail);
             }
         }
+
 
         static void Main(string[] args)
         {
@@ -102,21 +57,22 @@ namespace TjuvOchPolis
             town.RobbersOnMap = AmountofRobbers;
             town.PoliceOnMap = AmountofPolis;
             MakePeople(AmountofRobbers, AmountofCitizens, AmountofPolis, ref PeopleInTown);//make people and add to list
-            town.PlayerLocations = Town.PlayerLocation(PeopleInTown,town.PlayerLocations, town); // save player start locations to town 
-
-            
+            town.PlayerLocations = Town.PlayerLocation(PeopleInTown,town.PlayerLocations, town, PeopleInJail, town._jail); // save player start locations to town 
+          
 
             while (true)
             {
                 Console.Clear();
 
                 Person.Move(PeopleInTown);                                          // player moves onestep 
+                Person.MoveJail(PeopleInJail);
                 
-                Town.PlayerLocation(PeopleInTown, town._playerLocations, town);           // saves updated player location to the array                
+                Town.PlayerLocation(PeopleInTown, town._playerLocations, town, PeopleInJail, town._jail);           // saves updated player location to the array                
 
-                RunAllInteractions(PeopleInTown,PeopleInJail, town);
+                RunAllInteractionsAsync(PeopleInTown,PeopleInJail, town);
 
                 Town.PrintTown(town);                                               //Print Town and player locations 
+
 
                 Thread.Sleep(500);
             }
