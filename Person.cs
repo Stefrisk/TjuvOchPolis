@@ -59,8 +59,8 @@ namespace TjuvOchPolis
         {
             for (int i = 0; i < peopleInJail.Count; i++)
             {
-                peopleInJail[i].XLocation = (peopleInJail[i].XLocation + peopleInJail[i].XDirection + 17) % 17;   // Hantera wrapping
-                peopleInJail[i].YLocation = (peopleInJail[i].YLocation + peopleInJail[i].YDirection + 11) % 11; // Hantera wrapping
+                peopleInJail[i].XLocation = (peopleInJail[i].XLocation + peopleInJail[i].XDirection + 10) % 10;   // Hantera wrapping
+                peopleInJail[i].YLocation = (peopleInJail[i].YLocation + peopleInJail[i].YDirection + 10) % 10; // Hantera wrapping
             }
 
 
@@ -88,6 +88,19 @@ namespace TjuvOchPolis
         {
 
             int y = rnd.Next(0, 101);
+            return y;
+        }
+
+        public int RandomStartPosJailX()
+        {
+
+            int x = rnd.Next(0, 11); 
+            return x;
+        }
+        public int RandomStartPosJailY()
+        {
+
+            int y = rnd.Next(0, 11);
             return y;
         }
 

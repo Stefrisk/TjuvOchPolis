@@ -9,7 +9,6 @@ namespace TjuvOchPolis
  
     public class Police: Person
     {
-        
 
         public Police() : base() 
         {
