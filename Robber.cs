@@ -22,7 +22,7 @@ namespace TjuvOchPolis
             Name = name;
             Character = "R";
 
-            
+
         }
     }
 }
