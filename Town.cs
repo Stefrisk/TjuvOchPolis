@@ -179,16 +179,27 @@ namespace TjuvOchPolis
 
                  Jail[x, y] = PeopleInJail[i].Character;
             }
+            for (int i = 0; i < PeopleInJail.Count; i++) 
+            {
+                DateTime endTime = DateTime.Now;
+               int prisonTime = PeopleInJail[i].ItemsStolen * 10;
+                TimeSpan Prison = endTime - PeopleInJail[i].StartTime;
+                
+                if (Prison.TotalSeconds >= prisonTime)
+                {
+                    ReleasePrisoner(PeopleInJail, ListOfPeople, PeopleInJail[i], town);
+                }
+            }
 
             return PlayerLocations;
         }
 
-        public void ReleasePrisoner(List<Person> PeopleInJail, List<Person> PeopleInTown, Robber person, Town town)
+        public static void ReleasePrisoner(List<Person> PeopleInJail, List<Person> PeopleInTown, Person person, Town town)
         {
             PeopleInJail.Remove(person);
             PeopleInTown.Add(person);
             town.RobbersInJail--;
-            town._interactions.Push("En tjuv blev frisläppt");
+            town._interactions.Push($"Tjuven {person.Name} blev frisläppt");
         }
 
         public void HandleCitizenInteraction(Town town, Person robber)
@@ -208,7 +219,7 @@ namespace TjuvOchPolis
             }
         }
 
-        public async Task HandlePoliceInteractionAsync(Town town, Robber robber, List<Person> peopleInTown, List<Person> peopleInJail)
+        public static Robber HandlePoliceInteraction(Town town, Robber robber, List<Person> peopleInTown, List<Person> peopleInJail)
         {
             int x = robber.XLocation;
             int y = robber.YLocation;
@@ -226,7 +237,8 @@ namespace TjuvOchPolis
                     town.PlayerLocations[x, y].Inventory.Add(item);
                     town._interactions.Push($"Polisen {town.PlayerLocations[x, y].Name} beslagtog {item.Namn} från {robber.Name}");
                 }
-
+                robber.ItemsStolen = items.Count;
+                robber.StartTime = DateTime.Now;
                 peopleInJail.Add(robber);
                 peopleInTown.Remove(robber);
 
@@ -235,9 +247,9 @@ namespace TjuvOchPolis
                 town._jail[robber.XLocation, robber.YLocation] = "R";
 
 
-                await Program.StartDelayedTask(town, items.Count, robber, peopleInJail, peopleInTown);
 
             }
+                return robber;
         }
     }
 }

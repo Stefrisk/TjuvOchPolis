@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TjuvOchPolis
 {
-    public class Person
+    abstract public class Person
     {
         public static Random rnd = new Random();
 
@@ -17,7 +17,10 @@ namespace TjuvOchPolis
         public int YDirection { get; set; }
         public List<Item> Inventory { get; set; }
         public string Character {  get; set; }
-        
+        public DateTime StartTime { get; set; }
+        public int ItemsStolen { get; set; }
+
+
 
 
 

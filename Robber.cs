@@ -10,7 +10,6 @@ namespace TjuvOchPolis
     public class Robber : Person
     {
         
-
         public Robber() : base() 
         {
             
