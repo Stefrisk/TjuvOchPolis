@@ -43,7 +43,7 @@ namespace TjuvOchPolis
         static void Main(string[] args)
         {
             int AmountofRobbers = 15;                                                                               // we decide the amount of each type of player here 
-            int AmountofCitizens = 50;
+            int AmountofCitizens = 50;  // set how many of each person
             int AmountofPolis = 10;
 
             Town town = new Town();                                                                                 //Make town      

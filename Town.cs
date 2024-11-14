@@ -181,9 +181,9 @@ namespace TjuvOchPolis
             }
             for (int i = 0; i < PeopleInJail.Count; i++) 
             {
-                DateTime endTime = DateTime.Now;
+                DateTime Now = DateTime.Now;
                int prisonTime = PeopleInJail[i].ItemsStolen * 10;
-                TimeSpan Prison = endTime - PeopleInJail[i].StartTime;
+                TimeSpan Prison = Now - PeopleInJail[i].StartTime;
                 
                 if (Prison.TotalSeconds >= prisonTime)
                 {
